@@ -1,1 +1,8 @@
-https://www.youtube.com/watch?v=FBLAV1SbJFk
+https://www.youtube.com/watch?v=FBLAV1SbJ
+
+body utilizado no postman para teste 
+{
+    "num1": 1,
+    "num2": 5,
+    "operador": "*"
+}
