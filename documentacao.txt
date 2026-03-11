@@ -1,8 +1,120 @@
+video utilizado para revisao rapida do framework Flask
 https://www.youtube.com/watch?v=FBLAV1SbJ
 
-body utilizado no postman para teste 
-{
-    "num1": 1,
-    "num2": 5,
-    "operador": "*"
-}
+1. Sobre o projeto
+
+Este projeto é uma API simples feita em Python usando Flask que funciona como uma pequena calculadora.
+Ela recebe dois números e um operador matemático (como +, -, * ou /) e devolve o resultado do cálculo.
+
+
+2. Tecnologia utilizada
+
+O projeto foi desenvolvido usando:
+	•	Python – linguagem de programação simples e muito usada no mundo.
+	•	Flask – um microframework que permite criar aplicações web e APIs de forma rápida.
+
+3. Como o sistema funciona
+
+
+O sistema cria um pequeno servidor usando Flask.
+Dentro desse servidor existe uma rota chamada:
+“/calculo” 
+
+Essa rota recebe uma requisição do tipo POST, contendo três informações:
+	•	num1 → primeiro número
+	•	num2 → segundo número
+	•	operador → operação matemática
+
+O programa então verifica se os dados são válidos, realiza o cálculo e devolve o resultado em formato JSON.
+
+
+4. Estrutura básica do código
+
+O código começa importando as ferramentas necessárias:
+“from flask import Flask, jsonify, request” - código 
+
+	•	request → para receber dados enviados
+	•	jsonify → para devolver respostas organizadas em JSON
+
+Depois criamos a aplicação:
+
+“app = Flask(_name_)” 
+Isso cria o servidor da aplicação.
+
+
+5. Criando a rota da calculadora
+
+A parte principal do programa é essa:
+“@app.route('/calculo', methods=['POST'])” - código 
+Aqui estamos dizendo:
+Quando alguém enviar dados para /calculo, usando o método POST, execute a função calculo().
+
+
+
+6. Recebendo os dados
+
+Dentro da função, os dados enviados são capturados assim:
+“dados = request.get_json()” 
+Depois pegamos cada informação:
+num1 = dados.get('num1')
+num2 = dados.get('num2')
+operador = dados.get('operador').strip()
+
+Isso significa:
+	•	pegar o primeiro número
+	•	pegar o segundo número
+	•	pegar o operador matemático
+
+
+7. Validação dos dados
+
+Antes de fazer a conta, o programa verifica se tudo está correto.
+Primeiro ele verifica se o operador é válido:
+if operador not in ('+', '-', '*', '/'): 
+Se não for um desses quatro, o sistema retorna um erro.
+Depois ele verifica se os valores são realmente números:
+if not isinstance(num1, (int, float)) or not isinstance(num2, (int, float)):
+Se não forem números, também retorna erro.
+
+
+8. Realizando o cálculo
+
+Depois que tudo é validado, o programa realiza a operação.
+
+
+9. Retornando o resultado
+
+No final, o sistema devolve uma resposta em JSON:
+return jsonify({
+"num1": num1,
+"num2": num2,
+"operador": operador,
+"resultado": resultado
+}),
+
+A resposta mostra:
+os números enviados
+o operador usado
+o resultado final
+
+
+10. Executando o servidor
+
+O programa termina com:
+
+if _name_ == '_main_':
+    app.run(debug=True) 
+
+Isso faz o servidor iniciar quando o arquivo é executado.
+O modo debug ajuda durante o desenvolvimento porque mostra erros de forma mais clara.
+
+
+11. Exemplo de requisição
+
+Exemplo de dados enviados para a API:
+
+“{
+"num1": 10,
+"num2": 5,
+"operador": "+"
+}” - código 
